@@ -1,4 +1,4 @@
-const Result = ({ results }) => {
+const Result = ({ results, onShowClick }) => {
   if (results === null || results.length === 1) {
     return null
   }
@@ -15,7 +15,7 @@ const Result = ({ results }) => {
     <>
       {results.map(country =>
         <div key={country.cca2}>
-          {country.name.common}
+          {country.name.common} <button onClick={() => onShowClick(country.name.common)}>Show</button>
         </div>
       )}
     </>
