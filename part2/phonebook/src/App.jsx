@@ -94,11 +94,12 @@ const App = () => {
 
   const handleDeletePersonClick = (person) => {
     if (confirm(`Delete ${person.name}`)) {
+      const userId = person.id
       personService
-        .deletePerson([person.id])
-        .then(deletedPerson => {
-          setPersons(persons.filter(person => person.id != deletedPerson.id))
-        }).catch(error => {    
+        .deletePerson([userId])
+        .then(_ => {
+          setPersons(persons.filter(person => person.id != userId))
+        }).catch(error => {
           setErrorMessage(
             `Information of ${person.name} has aleredy been removed from server`
           )
