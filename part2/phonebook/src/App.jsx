@@ -82,9 +82,7 @@ const App = () => {
           setNewName('')
           setNumber('')
         }).catch(error => {
-          setErrorMessage(
-            `Information of ${createPerson.name} has aleredy been removed from server`
-          )
+          setErrorMessage(error.response.data.error)
           setTimeout(() => {
             setErrorMessage(null)
           }, 5000)
