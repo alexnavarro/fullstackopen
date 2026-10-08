@@ -1,12 +1,13 @@
 {
-  "claudeCode.preferredLocation": "panel",
-  "terminal.integrated.mouseWheelScrollSensitivity": 3,
-  "terminal.integrated.gpuAcceleration": "off",
-  "files.autoSave": "afterDelay",
-  "git.autofetch": true,
-  "workbench.colorTheme": "Visual Studio Dark",
-  "editor.formatOnSave": false,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
+  {
+    "claudeCode.preferredLocation": "panel",
+    "terminal.integrated.mouseWheelScrollSensitivity": 3,
+    "terminal.integrated.gpuAcceleration": "off",
+    "files.autoSave": "afterDelay",
+    "git.autofetch": true,
+    "workbench.colorTheme": "Visual Studio Dark",
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    }
   }
-}
