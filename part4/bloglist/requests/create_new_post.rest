@@ -1,9 +1,10 @@
 POST http://localhost:3001/api/blogs/ HTTP/1.1
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFsZXgiLCJpZCI6IjZhYzkzMzYxNzhiYWNhMDg1YmI0ZjNiOSIsImlhdCI6MTc5MTU3NDQ1N30.jGx5nERSRr2Ls4bl7OPNiRlNEJp2xZ2a7J0mscmO7hs
 
 {
-    "title": "new title",
-    "author": "Burua Aparecido",
-    "url": "http://buruani.dev",
-    "likes": 1
+    "title": "new title 6666",
+    "author": "Burua Boniaa",
+    "url": "http://bona.dev",
+    "likes": 19
 }
