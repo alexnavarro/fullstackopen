@@ -33,8 +33,6 @@ blogsRouter.delete('/:id', userExtractor, async (request, response) => {
     return response.status(404).json({ error: 'Blog not found' })
   }
 
-  console.log(`abacate blog.user?.toString() ${blog.user?.toString()} user.id.toString(): ${user.id.toString()}`)
-
   if (blog.user?.toString() === user.id.toString() ) {
     await blog.deleteOne()
     return response.status(204).end()
