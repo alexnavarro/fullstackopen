@@ -8,3 +8,15 @@
     margin-bottom: 10px;
 }
 
+.button {
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.button2 {
+    background-color: #008CBA;
+}

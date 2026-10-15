@@ -41,14 +41,14 @@ blogsRouter.delete('/:id', userExtractor, async (request, response) => {
   return response.status(401).json({ error: 'User not authorized to perform the action' })
 })
 
-blogsRouter.put('/:id', async (request, response) => {
-  const { likes } = request.body
-  const blog = await Blog.findById(request.params.id)
+blogsRouter.put('/:id', userExtractor, async (request, response) => {
+  const blog = await Blog.findById(request.params.id).populate('user', { username: 1, name: 1 })
 
   if(!blog) {
     return response.status(404).end()
   }
 
+  const { likes } = request.body
   blog.likes = likes
   const result = await blog.save()
   response.json(result)

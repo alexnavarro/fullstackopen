@@ -185,6 +185,12 @@ describe('when there is initially some blogs saved', () => {
   })
 
   describe('update of a blog post', () => {
+    let token
+
+    beforeEach (async () => {
+      token = await helper.login(api)
+    })
+
     test('succeeds with status code 204 for a valid update', async () => {
       const updatedLikes = {
         likes: 666
@@ -194,6 +200,7 @@ describe('when there is initially some blogs saved', () => {
 
       await api
         .put(`/api/blogs/${blogToUpdate.id}`)
+        .set('Authorization', `Bearer ${token}`)
         .send(updatedLikes)
         .expect(200)
 
@@ -212,20 +219,13 @@ describe('when there is initially some blogs saved', () => {
 
       await api
         .put(`/api/blogs/${invalidId}`)
+        .set('Authorization', `Bearer ${token}`)
         .send(updatedLikes)
         .expect(404)
     })
   })
 
   describe('when there is initially one user in db', () => {
-    // beforeEach (async () => {
-    //   await User.deleteMany({})
-
-    //   const passwordHash = await bcrypt.hash('sekret', 10)
-    //   const user = new User({ username: 'root', passwordHash })
-    //   await user.save()
-    // })
-
     test('creation succeeds with a fresh username', async () => {
       const usersAtStart = await helper.usersInDb()
 
