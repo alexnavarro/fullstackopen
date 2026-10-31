@@ -1,28 +1,69 @@
+import { CardContent, Typography, Link, Button, Box, Stack } from '@mui/material'
+import Card from '@mui/material/Card'
+
 const Blog = ({ blog, onLikeClicked, user, onRemoveClicked }) => {
-  if(!blog) {
+  if (!blog) {
     return null
   }
 
-  const blogStyle = {
-    paddingTop: 10,
-    paddingLeft: 2,
-    borderWidth: 1,
-    marginBottom: 5
-  }
+  const isOwner = user && user.username === blog?.user?.username
 
   return (
-    <div style={blogStyle}>
-      <div>
-        <h2>{blog.author}: {blog.title}</h2>
-        <div><a href={blog.url}>{blog.url}</a></div>
-        <div>likes {blog.likes} {user && <button onClick={() => onLikeClicked(blog.id, blog.likes + 1)}>like</button>}
-        </div>
-        <div>Added by {blog?.user?.name}</div>
-        {(user && user.username === blog?.user?.username) && (
-          <div><button className="button button2" onClick={() => onRemoveClicked(blog)}>remove</button></div>
-        )}
-      </div>
-    </div>
+    <Card
+      variant="outlined"
+      sx={{
+        maxWidth: 600,
+        mt: 3,
+        borderRadius: 2,
+        boxShadow: '0 2px 8px rgba(0,0,0,0.08)'
+      }}>
+      <CardContent>
+        <Typography variant="h5" component="h2" sx={{ fontWeight: 600, mb: 1 }}>
+          {blog.title}
+        </Typography>
+        <Typography variant="body1" color="text.secondary" sx={{ mb: 1 }}>
+          by {blog.author}
+        </Typography>
+        <Box sx={{ mb: 1 }}>
+          <Link
+            href={blog.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            underline="always"
+            sx={{ fontSize: '1rem' }}
+          >
+            {blog.url}
+          </Link>
+        </Box>
+        <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+          Added by {blog?.user?.name}
+        </Typography>
+        <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
+          <Typography variant="body1" sx={{ fontWeight: 500, mr: 0.5 }}>
+            {blog.likes} {blog.likes === 1 ? 'like' : 'likes'}
+          </Typography>
+          {user &&
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={() => onLikeClicked(blog.id, blog.likes + 1)}
+            >
+              like
+            </Button>
+          }
+          {isOwner && (
+            <Button
+              variant="outlined"
+              color="error"
+              size="small"
+              onClick={() => onRemoveClicked(blog)}
+            >
+              remove
+            </Button>
+          )}
+        </Stack>
+      </CardContent>
+    </Card>
   )
 }
 

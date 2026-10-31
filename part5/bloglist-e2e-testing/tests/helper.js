@@ -18,20 +18,19 @@ const createBlog = async (page, title, author, url) => {
 }
 
 const checkErrorMessage = async (page, errorMessage) => {
-  const errorDiv = page.locator('.error')
-  await expect(errorDiv).toContainText(errorMessage)
-  await expect(errorDiv).toHaveCSS('border-style', 'solid')
-  await expect(errorDiv).toHaveCSS('border-radius', '5px')
-  await expect(errorDiv).toHaveCSS('font-size', '20px')
-  await expect(errorDiv).toHaveCSS('padding', '10px')
-  await expect(errorDiv).toHaveCSS('margin-bottom', '10px')
-  await expect(errorDiv).toHaveCSS('color', 'rgb(255, 0, 0)')
-  await expect(errorDiv).toHaveCSS('background-color', 'rgb(211, 211, 211)')
+  const alert = page.getByRole('alert')
+
+  await expect(alert).toBeVisible()
+  await expect(alert).toContainText(errorMessage)
+  await expect(alert).toHaveCSS('margin-top', '10px')
+  await expect(alert).toHaveCSS('margin-bottom', '10px')
+
 }
 
 const like = async (page, link) => {
   await page.getByRole('link', { name: link }).click()
-  await expect(page.getByText('likes 0')).toBeVisible()
+  await expect(page).toHaveURL(/.*blogs/) 
+  await expect(page.getByText('0 likes')).toBeVisible()
   await page.getByRole('button', { name: 'like' }).click()
 }
 

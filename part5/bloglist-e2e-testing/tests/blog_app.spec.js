@@ -61,7 +61,7 @@ describe('Blog app', () => {
     test('like a created blog', async ({ page }) => {
       await createBlog(page, 'title example', 'Bonifacio gato', 'http://bonifacio.cat')
       await like(page, 'title example by Bonifacio gato')
-      await expect(page.getByText('likes 1')).toBeVisible()
+      await expect(page.getByText('1 like')).toBeVisible()
     })
 
     test('when user loggout like button is hidden', async ({ page }) => {
@@ -111,7 +111,7 @@ describe('Blog app', () => {
 
       await blogToLike.getByRole('button', { name: 'show' }).click()
       await blogToLike.getByRole('button', { name: 'like' }).click()
-      await expect(blogToLike).toContainText('likes 1')
+      await expect(blogToLike).toContainText('like 1')
 
       const allShowButtons = page.getByRole('button', { name: /show|hide/i })
       const firstBlog = allShowButtons.first().locator('../..')

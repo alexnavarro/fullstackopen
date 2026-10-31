@@ -1,8 +1,5 @@
 import { useState, useEffect } from 'react'
-import {
-  BrowserRouter as Router,
-  Routes, Route, Link, useMatch
-} from 'react-router-dom'
+import { Routes, Route, useMatch } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import Blog from './components/Blog'
 import BlogForm from './components/BlogForm'
@@ -11,13 +8,15 @@ import BlogList from './components/BlogList'
 import Notification from './components/Notification'
 import blogService from './services/blogs'
 import loginService from './services/login'
+import { Container, AppBar, Toolbar, Button } from '@mui/material'
+import ButtonAppBar from './components/ButtonAppBar'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [errorMessage, setErrorMessage] = useState(null)
+  const [notification, setNotification] = useState(null)
 
   const blogsSort = (a, b) => b.likes - a.likes
 
@@ -56,9 +55,9 @@ const App = () => {
       setPassword('')
       navigate('/')
     } catch {
-      setErrorMessage('wrong username or password')
+      setNotification({ text: 'wrong username or password', type: 'error' })
       setTimeout(() => {
-        setErrorMessage(null)
+        setNotification(null)
       }, 5000)
     }
   }
@@ -74,24 +73,24 @@ const App = () => {
     try {
       const blogResult = await blogService.create(blogObject)
 
-      setErrorMessage(`a new blog ${blogResult.title} by ${blogResult.author} added`)
+      setNotification({ text: `a new blog ${blogResult.title} by ${blogResult.author} added`, type: 'success' })
       setBlogs(blogs.concat(blogResult))
       navigate('/')
 
       setTimeout(() => {
-        setErrorMessage(null)
+        setNotification(null)
       }, 5000)
 
     } catch {
-      setErrorMessage('wrong credentials')
+      setNotification({ text: 'wrong credentials', type: 'error' })
       setTimeout(() => {
-        setErrorMessage(null)
+        setNotification(null)
       }, 5000)
     }
   }
 
   const handleLikes = async (blogId, likes) => {
-    if(!user) {
+    if (!user) {
       confirm('You should be logged in to perform this action')
       return null
     }
@@ -104,9 +103,9 @@ const App = () => {
       const blogResult = await blogService.update(blogId, blogObject)
       setBlogs(prevBlogs => prevBlogs.map(blog => blog.id === blogResult.id ? blogResult : blog).sort(blogsSort))
     } catch {
-      setErrorMessage('wrong credentials')
+      setNotification({ text: 'wrong credentials', type: 'error' })
       setTimeout(() => {
-        setErrorMessage(null)
+        setNotification(null)
       }, 5000)
     }
   }
@@ -118,16 +117,12 @@ const App = () => {
         navigate('/')
         setBlogs(prevBlogs => prevBlogs.filter(b => b.id !== blog.id))
       } catch {
-        setErrorMessage('No permission to remove')
+        setNotification({ text: 'wrong No permission to remove', type: 'error' })
         setTimeout(() => {
-          setErrorMessage(null)
+          setNotification(null)
         }, 5000)
       }
     }
-  }
-
-  const padding = {
-    padding: 5
   }
 
   const match = useMatch('/blogs/:id')
@@ -137,23 +132,9 @@ const App = () => {
     : null
 
   return (
-    <div>
-      <div>
-        <Link style={padding} to='/'>blogs</Link>
-        {
-          user ?
-            (
-              <>
-                <Link style={padding} to='/create'>new blog</Link>
-                <button onClick={handleLogout}>logout</button>
-              </>
-            )
-            :
-            <Link style={padding} to='/login'>login</Link>
-        }
-
-      </div>
-      <Notification message={errorMessage} />
+    <Container>
+      <ButtonAppBar user={user} handleLogout={handleLogout} />
+      <Notification notification={notification} />
       <Routes>
         <Route path='/' element={
           <BlogList blogs={blogs} />
@@ -176,12 +157,12 @@ const App = () => {
           />
         }
         />
-        <Route  path='/create' element={
+        <Route path='/create' element={
           <BlogForm createBlog={addBlog} />
         }
         />
       </Routes>
-    </div>
+    </Container>
   )
 }
 

@@ -30,14 +30,16 @@ describe('<Blog />', () => {
 
   test('renders its children', () => {
     renderBlog()
-    screen.getByText('authorTest: title')
+    screen.getByText('by authorTest')
   })
 
   test('at start the title and author, likes and url are displayed', () => {
     renderBlog()
-    const titleAuthorElement = screen.getByText('authorTest: title')
-    expect(titleAuthorElement).toBeVisible()
-    const likesElement = screen.getByText('likes 3')
+    const titleElement = screen.getByText('title')
+    expect(titleElement).toBeVisible()
+    const authorElement = screen.getByText('by authorTest')
+    expect(authorElement).toBeVisible()
+    const likesElement = screen.getByText('3 likes')
     expect(likesElement).toBeVisible()
     const urlElement = screen.getByText('https://test.com')
     expect(urlElement).toBeVisible()
@@ -69,7 +71,7 @@ describe('<Blog />', () => {
 
   test('likes should be visible, but like button should not be visible', () => {
     renderBlog(null)
-    const likesElement = screen.getByText('likes 3')
+    const likesElement = screen.getByText('3 likes')
     expect(likesElement).toBeVisible()
     const likeButton = screen.queryByRole('button', { name: 'like' })
     expect(likeButton).not.toBeInTheDocument()

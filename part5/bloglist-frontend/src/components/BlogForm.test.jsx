@@ -9,9 +9,9 @@ test('<BlogForm /> updates parent state and calls onSubmit', async () => {
 
   render(<BlogForm createBlog={createBlog} />)
 
-  const titleInput = screen.getByLabelText(/title:/i)
-  const authorInput = screen.getByLabelText(/author:/i)
-  const urlInput = screen.getByLabelText(/url:/i)
+  const titleInput = screen.getByLabelText(/title/i)
+  const authorInput = screen.getByLabelText(/author/i)
+  const urlInput = screen.getByLabelText(/url/i)
   const sendButton = screen.getByText('create')
 
   await user.type(titleInput, 'title title ...')
