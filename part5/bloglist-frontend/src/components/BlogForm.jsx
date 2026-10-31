@@ -26,7 +26,6 @@ const BlogForm = ({ createBlog }) => {
         <div style={{ marginBottom: 10 }}>
           <TextField
             size="small"
-            id="outlined-basic"
             label="title"
             variant="outlined"
             value={newTitle}
@@ -37,7 +36,6 @@ const BlogForm = ({ createBlog }) => {
         <div style={{ marginBottom: 10 }}>
           <TextField
             size="small"
-            id="outlined-basic"
             label="author"
             variant="outlined"
             value={newAuthor}
@@ -48,7 +46,6 @@ const BlogForm = ({ createBlog }) => {
         <div style={{ marginBottom: 14 }}>
           <TextField
             size="small"
-            id="outlined-basic"
             label="url"
             variant="outlined"
             value={newUrl}

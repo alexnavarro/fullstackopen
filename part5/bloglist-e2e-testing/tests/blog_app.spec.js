@@ -60,20 +60,20 @@ describe('Blog app', () => {
 
     test('like a created blog', async ({ page }) => {
       await createBlog(page, 'title example', 'Bonifacio gato', 'http://bonifacio.cat')
-      await like(page, 'title example Bonifacio gato')
+      await like(page, 'title example by Bonifacio gato')
       await expect(page.getByText('likes 1')).toBeVisible()
     })
 
     test('when user loggout like button is hidden', async ({ page }) => {
       await createBlog(page, 'title example', 'Bonifacio gato', 'http://bonifacio.cat')
       await page.getByRole('button', { name: 'logout' }).click()
-      await page.getByRole('link', { name: 'title example Bonifacio gato' }).click()
+      await page.getByRole('link', { name: 'title example by Bonifacio gato' }).click()
       await expect(page.getByRole('button', { name: 'like' })).not.toBeVisible()
     })
 
     test('delete a created blog', async ({ page }) => {
       await createBlog(page, 'title example2', 'Bonifacio gato2', 'http://bonifacio.cat')
-      await page.getByRole('link', { name: 'title example2 Bonifacio gato2' }).click()
+      await page.getByRole('link', { name: 'title example2 by Bonifacio gato2' }).click()
 
       page.once('dialog', async dialog => {
         await dialog.accept()
@@ -87,7 +87,7 @@ describe('Blog app', () => {
 
     test('when user added a blog then should see the remove button', async ({ page }) => {
       await createBlog(page, 'title example2', 'Bonifacio gato2', 'http://bonifacio.cat')
-      await page.getByRole('link', { name: 'title example2 Bonifacio gato2' }).click()
+      await page.getByRole('link', { name: 'title example2 by Bonifacio gato2' }).click()
       await expect(page.getByRole('button', { name: 'remove' })).toBeVisible()
     })
 
@@ -95,7 +95,7 @@ describe('Blog app', () => {
       await createBlog(page, 'title example2', 'Bonifacio gato2', 'http://bonifacio.cat')
       await page.getByRole('button', { name: 'logout' }).click()
       await loginWith(page, 'bona', 'gata')
-      await page.getByRole('link', { name: 'title example2 Bonifacio gato2' }).click()
+      await page.getByRole('link', { name: 'title example2 by Bonifacio gato2' }).click()
       await expect(page.getByRole('button', { name: 'remove' })).not.toBeVisible()
     })
 

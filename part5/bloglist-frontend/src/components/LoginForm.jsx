@@ -31,25 +31,6 @@ const LoginForm = ({
             onChange={handlePasswordChange}
           />
         </div>
-        {/* <div>
-          <label>
-          username
-            <input
-              value={username}
-              onChange={handleUsernameChange}
-            />
-          </label>
-        </div> */}
-        {/* <div>
-          <label>
-            password
-            <input
-              type="password"
-              value={password}
-              onChange={handlePasswordChange}
-            />
-          </label>
-        </div> */}
         <div>
           <Button type="submit" variant="contained" style={{ marginTop: 10 }}>login</Button>
         </div>
