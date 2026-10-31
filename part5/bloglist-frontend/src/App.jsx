@@ -115,8 +115,8 @@ const App = () => {
     if (confirm(`Remove blog ${blog.title} by ${blog.author}`)) {
       try {
         await blogService.remove(blog.id)
-        setBlogs(prevBlogs => prevBlogs.filter(b => b.id !== blog.id))
         navigate('/')
+        setBlogs(prevBlogs => prevBlogs.filter(b => b.id !== blog.id))
       } catch {
         setErrorMessage('No permission to remove')
         setTimeout(() => {
