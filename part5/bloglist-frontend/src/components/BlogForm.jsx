@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { TextField, Button } from '@mui/material'
 
 const BlogForm = ({ createBlog }) => {
   const [newTitle, setTitle] = useState('')
@@ -20,39 +21,44 @@ const BlogForm = ({ createBlog }) => {
 
   return (
     <div>
-      <h2>Create a new</h2>
+      <h2>Create new</h2>
       <form onSubmit={addBlog}>
-        <div>
-          <label>
-          title:
-            <input
-              type="text"
-              value={newTitle}
-              onChange={({ target }) => setTitle(target.value)}
-            />
-          </label>
+        <div style={{ marginBottom: 10 }}>
+          <TextField
+            size="small"
+            id="outlined-basic"
+            label="title"
+            variant="outlined"
+            value={newTitle}
+            sx={{ width: 500 }}
+            onChange={({ target }) => setTitle(target.value)}
+          />
+        </div>
+        <div style={{ marginBottom: 10 }}>
+          <TextField
+            size="small"
+            id="outlined-basic"
+            label="author"
+            variant="outlined"
+            value={newAuthor}
+            sx={{ width: 500 }}
+            onChange={({ target }) => setAuthor(target.value)}
+          />
+        </div>
+        <div style={{ marginBottom: 14 }}>
+          <TextField
+            size="small"
+            id="outlined-basic"
+            label="url"
+            variant="outlined"
+            value={newUrl}
+            sx={{ width: 500 }}
+            onChange={({ target }) => setUrl(target.value)}
+          />
         </div>
         <div>
-          <label>
-          author:
-            <input
-              type="text"
-              value={newAuthor}
-              onChange={({ target }) => setAuthor(target.value)}
-            />
-          </label>
+          <Button type="submit"variant="contained" style={{ marginTop: 10 }}>create</Button>
         </div>
-        <div>
-          <label>
-          url:
-            <input
-              type="text"
-              value={newUrl}
-              onChange={({ target }) => setUrl(target.value)}
-            />
-          </label>
-        </div>
-        <button type="submit">create</button>
       </form>
     </div>
 
